@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AuthProvider, useAuth } from './controller/AuthContext';
-import { RegisterForm, LoginForm } from './components/RegistrationForm';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 import { TodoList } from './components/TodoList';
 import './App.css';
 
 function AppContent() {
   const { isAuthenticated, logout, message } = useAuth();
+  const [showRegister, setShowRegister] = useState(false); // Toggle between login and register
 
   return (
     <div className="App">
@@ -24,8 +26,33 @@ function AppContent() {
             <h1>Welcome to Todo List App</h1>
             <p>Please register or login to access your todo list.</p>
             <div className="auth-forms">
-              <LoginForm />
-              <RegisterForm />
+              {showRegister ? (
+                <>
+                  <RegisterForm />
+                  <p>
+                    Already have an account?{' '}
+                    <button
+                      onClick={() => setShowRegister(false)}
+                      className="toggle-button"
+                    >
+                      Login here
+                    </button>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <LoginForm />
+                  <p>
+                    Don't have an account?{' '}
+                    <button
+                      onClick={() => setShowRegister(true)}
+                      className="toggle-button"
+                    >
+                      Register here
+                    </button>
+                  </p>
+                </>
+              )}
             </div>
           </>
         )}

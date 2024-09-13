@@ -8,7 +8,9 @@ export const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [showMenu, setShowMenu] = useState(false); // New state for menu visibility
+  const [showMenu, setShowMenu] = useState(false); // State for menu visibility
+  const [isEditing, setIsEditing] = useState(false); // State to track if editing
+  const [currentTodoIndex, setCurrentTodoIndex] = useState(null); // Track which todo is being edited
 
   useEffect(() => {
     if (currentUser) {
@@ -51,13 +53,33 @@ export const TodoList = () => {
     saveTodosToStorage(updatedTodos);
   };
 
+  const startEditing = (index) => {
+    setIsEditing(true);
+    setCurrentTodoIndex(index);
+    setTitle(todos[index].title);
+    setDescription(todos[index].description);
+  };
+
+  const submitEdit = (e) => {
+    e.preventDefault();
+    const updatedTodos = todos.map((todo, i) =>
+      i === currentTodoIndex ? { ...todo, title, description } : todo
+    );
+    setTodos(updatedTodos);
+    saveTodosToStorage(updatedTodos);
+    setIsEditing(false);
+    setCurrentTodoIndex(null);
+    setTitle('');
+    setDescription('');
+  };
+
   return (
     <div className="todo-page">
       <div className="todo-form-container">
         <h1 className="welcome-message">Welcome, {currentUser}!</h1>
-        <h3 className="todo-title">Add New Todo</h3>
+        <h3 className="todo-title">{isEditing ? 'Edit Todo' : 'Add New Todo'}</h3>
 
-        <form className="todo-form" onSubmit={addTodo}>
+        <form className="todo-form" onSubmit={isEditing ? submitEdit : addTodo}>
           <input
             type="text"
             className="todo-input"
@@ -72,7 +94,9 @@ export const TodoList = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <button type="submit" className="add-todo-button">Add Todo</button>
+          <button type="submit" className="add-todo-button">
+            {isEditing ? 'Save Changes' : 'Add Todo'}
+          </button>
         </form>
 
         <button
@@ -109,6 +133,7 @@ export const TodoList = () => {
               >
                 {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
               </button>
+              <button onClick={() => startEditing(index)} className="edit-todo-button">Edit</button>
               <button onClick={() => deleteTodo(index)} className="delete-todo-button">Delete</button>
             </motion.li>
           ))}

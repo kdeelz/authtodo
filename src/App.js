@@ -3,7 +3,7 @@ import { AuthProvider, useAuth } from './controller/AuthContext';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import { TodoList } from './components/TodoList';
-import './App.css';
+
 
 function AppContent() {
   const { isAuthenticated, logout, message } = useAuth();

@@ -3,6 +3,7 @@ import { useAuth } from '../controller/AuthContext';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import '../css/Registerform.css'; // Ensure the CSS file is correctly imported
+import '../App.css';
 
 const RegisterForm = () => {
   const { register, message } = useAuth();

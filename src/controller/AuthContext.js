@@ -8,6 +8,13 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const register = (username, password) => {
+    const existingUser = JSON.parse(localStorage.getItem(username));
+    
+    if (existingUser) {
+      alert('Username already exists. Please choose a different one.');
+      return;
+    }
+    
     localStorage.setItem(username, JSON.stringify({ username, password, todos: [] }));
     setIsAuthenticated(true);
     setCurrentUser(username);

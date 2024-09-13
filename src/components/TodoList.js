@@ -52,6 +52,7 @@ export const TodoList = () => {
 
   return (
     <div className="todo-container">
+      <h1 className="welcome-message">Welcome, {currentUser}!</h1> {/* Display username */}
       <h3 className="todo-title">Your Todo List</h3>
 
       <form className="todo-form" onSubmit={addTodo}>

@@ -1,7 +1,7 @@
 /* src/App.css */
 
 body {
-    font-family: 'Arial', sans-serif;
+  font-family: "Poppins", sans-serif;
     background-image: url("about.jpg");
     margin: 0;
     display: flex;
@@ -25,8 +25,8 @@ body {
   }
   
   h1 {
-    font-size: 28px;
-    color: #333;
+    font-size: 40px;
+    color: #000000;
   }
   
   .auth-forms {

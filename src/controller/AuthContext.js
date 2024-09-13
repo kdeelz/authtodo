@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import Alert from '../components/Alert'; // Importing the custom Alert component
 
 // Create Auth Context
 const AuthContext = createContext();
@@ -6,19 +7,23 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [alertType, setAlertType] = useState(''); // Type: success or error
 
   const register = (username, password) => {
     const existingUser = JSON.parse(localStorage.getItem(username));
     
     if (existingUser) {
-      alert('Username already exists. Please choose a different one.');
+      setAlertMessage('Username already exists. Please choose a different one.');
+      setAlertType('error');
       return;
     }
     
     localStorage.setItem(username, JSON.stringify({ username, password, todos: [] }));
     setIsAuthenticated(true);
     setCurrentUser(username);
-    alert('Registration successful! You are now logged in.'); // Alert for registration success
+    setAlertMessage('Registration successful! You are now logged in.');
+    setAlertType('success');
   };
 
   const login = (username, password) => {
@@ -26,21 +31,31 @@ export const AuthProvider = ({ children }) => {
     if (storedUser && storedUser.username === username && storedUser.password === password) {
       setIsAuthenticated(true);
       setCurrentUser(username);
-      alert('Login successful! Welcome back.'); // Alert for login success
+      setAlertMessage('Login successful! Welcome back.');
+      setAlertType('success');
     } else {
-      alert('Invalid username or password. Please try again.'); // Alert for login failure
+      setAlertMessage('Invalid username or password. Please try again.');
+      setAlertType('error');
     }
   };
 
   const logout = () => {
     setIsAuthenticated(false);
     setCurrentUser(null);
-    alert('You have successfully logged out.'); // Alert for logout
+    setAlertMessage('You have successfully logged out.');
+    setAlertType('success');
+  };
+
+  const closeAlert = () => {
+    setAlertMessage(null);
   };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, register, login, logout, currentUser }}>
       {children}
+      {alertMessage && (
+        <Alert message={alertMessage} type={alertType} onClose={closeAlert} />
+      )}
     </AuthContext.Provider>
   );
 };

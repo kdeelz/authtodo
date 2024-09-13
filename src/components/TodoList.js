@@ -118,24 +118,38 @@ export const TodoList = () => {
 
         <ul className="todo-list">
           {todos.map((todo, index) => (
-            <motion.li
-              key={index}
-              className={`todo-item ${todo.completed ? 'completed' : ''}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h4 className="todo-item-title">{todo.title}</h4>
-              <p className="todo-item-description">{todo.description}</p>
-              <button
-                onClick={() => toggleComplete(index)}
-                className="toggle-todo-button"
-              >
-                {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
-              </button>
-              <button onClick={() => startEditing(index)} className="edit-todo-button">Edit</button>
-              <button onClick={() => deleteTodo(index)} className="delete-todo-button">Delete</button>
-            </motion.li>
+      <motion.li
+      key={index}
+      className={`todo-item ${todo.completed ? 'completed' : ''}`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <h4 className="todo-item-title">{todo.title}</h4>
+      <p className="todo-item-description">{todo.description}</p>
+    
+      <div className="todo-item-buttons">
+        <button
+          onClick={() => toggleComplete(index)}
+          className="toggle-todo-button"
+        >
+          {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
+        </button>
+        <button
+          onClick={() => startEditing(index)}
+          className="edit-todo-button"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => deleteTodo(index)}
+          className="delete-todo-button"
+        >
+          Delete
+        </button>
+      </div>
+    </motion.li>
+    
           ))}
         </ul>
       </motion.div>

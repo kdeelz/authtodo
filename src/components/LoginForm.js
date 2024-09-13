@@ -1,7 +1,7 @@
-// src/components/LoginForm.js
+
 import React, { useState } from 'react';
 import { useAuth } from '../controller/AuthContext';
-import '../css/Registerform.css'; // Assuming you have the CSS file
+import '../css/Registerform.css'; 
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');

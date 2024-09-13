@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from '../controller/AuthContext';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import '../css/Registerform.css'; // Ensure the CSS file is correctly imported
+import '../css/Registerform.css'; 
 import '../App.css';
 
 const RegisterForm = () => {

@@ -28,7 +28,7 @@
 /* Button to toggle the todo list menu */
 .toggle-menu-button {
   padding: 10px;
-  background-color: #007bff;
+  background-color: #003976;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -142,7 +142,7 @@
 
 .add-todo-button {
   padding: 10px;
-  background-color: #007bff;
+  background-color: #2100a5;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -152,7 +152,7 @@
 }
 
 .add-todo-button:hover {
-  background-color: #0056b3;
+  background-color: #013d7d;
 }
 .todo-title {
   font-size: 20px;
@@ -177,26 +177,26 @@
 }
 
 .toggle-todo-button {
-  background-color: #28a745;
-  color: #fff;
+  background-color: #2bd05a;
+  color: #ffffff;
 }
 
 .toggle-todo-button:hover {
   background-color: #218838;
 }
 
-.delete-todo-button {
-  background-color: #dc3545;
-  color: #fff;
-}
 
 .delete-todo-button:hover {
   background-color: #c82333;
 }
+.edit-todo-button i, .delete-todo-button i {
+  font-size: 1.2em;
+  margin-right: 5px;
+  cursor: pointer;
+}
 
-.edit-todo-button {
-  background-color: blue;
-  color: #fff;
+.edit-todo-button i:hover, .delete-todo-button i:hover {
+  color: #007bff; /* Change color on hover */
 }
 
 .edit-todo-button:hover {

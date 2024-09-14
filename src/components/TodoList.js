@@ -136,16 +136,19 @@ export const TodoList = () => {
           {todo.completed ? 'Mark as Incomplete' : 'Mark as Complete'}
         </button>
         <button
-          onClick={() => startEditing(index)}
-          className="edit-todo-button"
+           onClick={() => startEditing(index)}
+             className="edit-todo-button"
+             aria-label="Edit Todo"
         >
-          Edit
+         <i className="bx bx-edit"></i>
         </button>
+
         <button
-          onClick={() => deleteTodo(index)}
-          className="delete-todo-button"
+           onClick={() => deleteTodo(index)}
+           className="delete-todo-button"
+           aria-label="Delete Todo"
         >
-          Delete
+       <i className="bx bx-trash"></i>
         </button>
       </div>
     </motion.li>
